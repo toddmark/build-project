@@ -2,9 +2,10 @@ const path = require("path");
 const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const common = ["react-hot-loader/patch"]
 module.exports = {
   entry: { 
-    index: [ "./src/index.js"]
+    a: [...common, "./src/component/index.js"]
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -29,8 +30,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      filename: "index.html",
-      // chunks: "./src/index.js"
+      filename: "about.html"
     }),
     new Webpack.NamedModulesPlugin(),
     new Webpack.HotModuleReplacementPlugin()

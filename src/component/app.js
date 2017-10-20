@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = (() =>  {
   return (
-    <h1>pre</h1>
+    <h1>preset</h1>
   )
 })
 
