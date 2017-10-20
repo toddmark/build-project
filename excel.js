@@ -50,6 +50,6 @@ sheet.map(item => {
 
 // console.log(result);
 
-fs.writeFile("link.js", JSON.stringify(result), function (err) {
+fs.writeFile("link.json", JSON.stringify(result), function (err) {
   console.log("The file was saved! Time:", new Date() - start);
 }); 
