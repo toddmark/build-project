@@ -1,6 +1,7 @@
 const path = require("path");
 const Webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const common = ["react-hot-loader/patch"]
 
@@ -20,7 +21,7 @@ htmls.map(item => {
 
 module.exports = {
   entry: entry,
-  devtool: 'inline-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     hot: true
   },
@@ -46,9 +47,11 @@ module.exports = {
         title: item.filename,
         template: "./src/template.html",
         filename: `${item.filename}.html`,
-        chunks: [item.filename] 
+        chunks: ['commons', item.filename] 
       })
     }),
+    new Webpack.optimize.CommonsChunkPlugin({ name: "commons", filename: "commons.js", }),
+    new BundleAnalyzerPlugin(),
     new Webpack.NamedModulesPlugin(),
     new Webpack.HotModuleReplacementPlugin()
   ]
