@@ -1,0 +1,1 @@
+document.bgColor = "#333"

@@ -13,17 +13,13 @@ htmls = htmls.map(item => {
   }
 })
 
-const entry = htmls.map(item => {
-  return {
-    [item.filename]: path.resolve('src/entry/') + `${item.filename}.js`
-  }
+const entry = {}
+htmls.map(item => {
+   entry[item.filename] = path.resolve('src/entry') + `/${item.filename}.js`;
 })
 
-console.log(...entry);
-
-
 module.exports = {
-  entry: {entry},
+  entry: entry,
   devtool: 'inline-source-map',
   devServer: {
     hot: true
@@ -47,9 +43,11 @@ module.exports = {
   plugins: [
     ...htmls.map(item => {
       return new HtmlWebpackPlugin({
+        title: item.filename,
         template: "./src/template.html",
-        filename: `${item.filename}.html`
-      })  
+        filename: `${item.filename}.html`,
+        chunks: [item.filename] 
+      })
     }),
     new Webpack.NamedModulesPlugin(),
     new Webpack.HotModuleReplacementPlugin()
